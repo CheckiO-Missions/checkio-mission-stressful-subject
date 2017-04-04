@@ -1,0 +1,33 @@
+<p class="for_info_only"><i>Sofia had a very stressful month and decided to get a vacation for a week. To avoid any stress during the vacation she wants to forward any email with stressful subject to Stephen</i></p>
+
+<p>
+    The function should recognise is passed subject is stressful. By stressful subjects means a subject that has all letters uppercased, ends by at least 3 exclamation marks or contains at least one of the following words "help", "asap", "urgent". Any of those "red" words can be spelled in different ways - "HELP", "help", "HeLp", "H!E!L!P!", "H-E-L-P", even in a very loooong way "HHHEEEEEEEEELLP"
+</p>
+
+<p>
+    <strong>Input: </strong> Subject line as a string
+</p>
+
+<p>
+    <strong>Output: </strong> Boolean. 
+</p>
+
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Example:</strong>
+    </p>
+<pre class="brush: python">{% if interpreter.slug == "js-node" %}
+isStressful("Hi") == false
+isStressful("I neeed HELP") == true
+{% else %}
+is_stressful("Hi") == False
+is_stressful("I neeed HELP") == True
+{% endif %}</pre>
+</div>
+
+<p>
+    <strong>Precondition:</strong>
+    <i>subject can be up to 100 letters</i>
+</p>
