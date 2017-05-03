@@ -71,6 +71,18 @@ TESTS = {
         {
             "input": "U-R-G-E-N-T issue",
             "answer": True
+        },
+        {
+            "input": "I’m REALLY happy on my vacation!",
+            "answer": False
+        },
+        {
+            "input": "This is very urgent!",
+            "answer": True
+        },
+        {
+            "input": "Heeeeeey!!! I’m having so much fun!”",
+            "answer": False
         }
     ]
 }
