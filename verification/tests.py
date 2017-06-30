@@ -83,6 +83,10 @@ TESTS = {
         {
             "input": "Heeeeeey!!! I’m having so much fun!”",
             "answer": False
+        },
+        {
+            "input": "HI HOW ARE YOU?",
+            "answer": True
         }
     ]
 }
