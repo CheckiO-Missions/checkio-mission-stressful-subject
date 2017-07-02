@@ -87,6 +87,14 @@ TESTS = {
         {
             "input": "HI HOW ARE YOU?",
             "answer": True
+        },
+        {
+            "input": "He loves peace",
+            "answer": False
+        },
+        {
+            "input": "Hello puppy",
+            "answer": False
         }
     ]
 }
