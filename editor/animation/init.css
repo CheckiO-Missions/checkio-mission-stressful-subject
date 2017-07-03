@@ -161,3 +161,11 @@ fieldset[disabled] .btn {
 
 /* Your CSS */
 /*          */
+.animation-content .explanation span.red_word {
+    font-weight: bold;
+    color: #FA8F00
+}
+.animation-content .explanation span.normal {
+    font-weight: bold;
+    color: #4094C7;
+}
