@@ -1,0 +1,37 @@
+<div class="for_info_only" style="text-align: center">
+    <img src="{{MEDIA}}title.png" style="max-height: 296px">
+</div>
+
+<p class="for_info_only"><i>У Софии был очень напряженный месяц и она решила взять отпуск на неделю. Чтобы избежать стресса во время отпуска, она хочет перенаправлять Стивену электронные письма со стрессовыми темами.</i></p>
+
+<p>
+    Функция должна распознавать является ли тема письма стрессовой. Стрессовая тема определяется тем, что все буквы в верхнем регистре, и / или заканчиваются как минимум тремя восклицательными знаками, и / или содержат по крайней мере одно из следующих слов-маркеров: "help", "asap", "urgent". Любое из этих слов-маркеров может быть написано по-разному: «HELP», «help», «HeLp», «H! E! L! P!», «H-E-L-P», и даже очень непринужденно «HHHEEEEEEEEELLP».
+</p>
+
+<p>
+    <strong>Входные данные: </strong> Тема письма в виде строки.
+</p>
+
+<p>
+    <strong>Выходные данные: </strong> Boolean. 
+</p>
+
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Привер:</strong>
+    </p>
+<pre class="brush: python">{% if interpreter.slug == "js-node" %}
+isStressful("Hi") == false
+isStressful("I neeed HELP") == true
+{% else %}
+is_stressful("Hi") == False
+is_stressful("I neeed HELP") == True
+{% endif %}</pre>
+</div>
+
+<p>
+    <strong>Предварительное условие:</strong>
+    <i>subject can be up to 100 letters</i>
+</p>
