@@ -95,6 +95,10 @@ TESTS = {
         {
             "input": "Hello puppy",
             "answer": False
+        },
+        {
+            "input": "Headlamp, wastepaper bin and supermagnificently",
+            "answer": False
         }
     ]
 }
