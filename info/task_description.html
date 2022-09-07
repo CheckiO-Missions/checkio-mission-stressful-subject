@@ -2,36 +2,39 @@
     <img src="{{MEDIA}}title.png" style="max-height: 296px">
 </div>
 
-<p class="for_info_only"><i>Sofia has had a very stressful month and decided to take a vacation for a week. To avoid any stress during her vacation she wants to forward emails with a stressful subject line to Stephen.</i></p>
-
-<p>
-    The function should recognise if a subject line is stressful. A stressful subject line means that all letters are in uppercase, and/or ends by at least 3 exclamation marks, and/or contains at least one of the following “red” words: "help", "asap", "urgent". Any of those "red" words can be spelled in different ways - "HELP", "help", "HeLp", "H!E!L!P!", "H-E-L-P", even in a very loooong way "HHHEEEEEEEEELLP," they just can't have any other letters interspersed between them.
+<p class="for_info_only">
+    <i>Sofia has had a very stressful month and decided to take a vacation for a week.
+       To avoid any stress during her vacation she wants to forward emails with
+       a stressful subject line to Stephen.</i>
 </p>
 
 <p>
-    <strong>Input: </strong> Subject line as a string.
+    The function should recognize if a subject line is stressful.
+    A stressful subject line means that all letters are in uppercase, and/or ends
+    by at least 3 exclamation marks, and/or contains at least one of the following
+    “red” words: "help", "asap", "urgent". Any of those "red" words can be spelled
+    in different ways - "HELP", "help", "HeLp", "H!E!L!P!", "H-E-L-P", even in a
+    very loooong way "HHHEEEEEEEEELLP," they just can't have any other letters interspersed between them.
 </p>
 
 <p>
-    <strong>Output: </strong> Boolean. 
+    <strong>Input:</strong> Subject line as a string.
+</p>
+
+<p>
+    <strong>Output:</strong> Boolean. 
 </p>
 
 
 
 <div class="for_info_only">
     <p>
-        <strong>Example:</strong>
+        <strong>Examples:</strong>
     </p>
-<pre class="brush: python">{% if interpreter.slug == "js-node" %}
-isStressful("Hi") == false
-isStressful("I neeed HELP") == true
-{% else %}
-is_stressful("Hi") == False
-is_stressful("I neeed HELP") == True
-{% endif %}</pre>
+    <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <p>
     <strong>Precondition:</strong>
-    <i>Subject can be up to 100 letters</i>
+    <li><i>Subject can be up to 100 letters</i></li>
 </p>
