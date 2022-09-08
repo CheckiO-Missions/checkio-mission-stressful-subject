@@ -17,16 +17,16 @@ TESTS = {
         {
             "input": ["I neeed HELP"],
             "answer": True
+        },
+        {
+            "input": ["I neeed HLEP"],
+            "answer": False
         }
     ],
     "Extra": [
         {
             "input": ["Hi"],
             "answer": False
-        },
-        {
-            "input": ["I neeed HELP"],
-            "answer": True
         },
         {
             "input": ["HELP"],
