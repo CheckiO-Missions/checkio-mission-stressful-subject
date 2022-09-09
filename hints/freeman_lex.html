@@ -75,7 +75,7 @@ cond3 = any(word in ("help", "asap", "urgent")
     <br />
     <br />
         <pre class="brush: python">
-def convert(word):
+def convert(word: str) -> str:
 
     s = ""
     for char in word.lower():
@@ -97,7 +97,7 @@ def convert(word):
     <br />
     <br />
         <pre class="brush: python">
-def convert(word):
+def convert(word: str) -> str:
 
     s = ""
     for char in word.lower():
@@ -119,7 +119,7 @@ def convert(word):
         <br />
         <br />
         <pre class="brush: python">
-def is_stressful(subj):
+def is_stressful(subj: str) -> bool:
 
     cond1 = subj.isupper()
     cond2 = subj.endswith("!!!")
@@ -128,7 +128,7 @@ def is_stressful(subj):
     
     return any([cond1, cond2, cond3])
 
-def convert(word):
+def convert(word: str) -> str:
     
     s = ""
     for char in word.lower():
