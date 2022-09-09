@@ -1,0 +1,177 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Я уявлення не маю, як розпочати розв'язок цієї місії.
+    </div>
+    <div class="answer">
+        Загалом, ідея у тому, щоб перевірити вхідний рядок за трьома умовами.
+        Для третьої умови тобі потрібно конвертувати слова за допомогою додаткових операцій.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Як розпочати цю перевірку?
+    </div>
+    <div class="answer">
+        Перша умова - всі літери у верхньому регістрі. Ти можеш зробити цю перевірку
+        за допомогою рядкового методу <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a>.
+        Він повертає True якщо всі літери у рядку є великими:
+        <br />
+        <br />
+        <pre class="brush: python">
+cond1 = subj.isupper()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Виглядає просто, але я не відчуваю впевненості. Потрібна підказка щодо наступного кроку.
+    </div>
+    <div class="answer">
+        Друга умова - вхідний рядок завершується трьома знаками оклику.
+        І Python настільки крутий, що знову має рядковий метод з такою назвою і фукнціоналом:
+        <a target="_blank" href="https://www.w3schools.com/python/ref_string_endswith.asp">str.endswith()</a>.
+        Використай його для перевірки другої умови: 
+        <br />
+        <br />
+        <pre class="brush: python">
+cond2 = subj.endswith("!!!")        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Добре, але третя умова більш складна. Як її перевірити?
+    </div>
+    <div class="answer">
+        Давай подумаємо, що тобі потрібно зробити і потім "перекладемо" це у код.
+        Рядок є стресовим, якщо будь-яке слово у ньому зустрічається в сукупності
+        ("help", "asap", "urgent"). Але це слово має бути конвертованим до перевірки.
+        Щоб втілити цю ідею у коді, тобі знадобиться функція <a target="_blank" href="https://www.w3schools.com/python/ref_func_any.asp">any()</a>,
+        <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">списковий вираз</a>,
+        функція <a target="_blank" href="https://www.w3schools.com/python/ref_func_map.asp">map()</a>,
+        щоб застосувати певну функцію до кожного елемента у послідовності. І звичайно,
+        рядок повинен бути розбитий на окремі слова з допомогою рядкового методу <a target="_blank" href="https://www.w3schools.com/python/ref_string_split.asp">str.split()</a>.
+        <br />
+        <br />
+        <pre class="brush: python">
+cond3 = any(word in ("help", "asap", "urgent")
+            for word in map(convert, subj.split()))        
+        </pre>
+        Функція "convert" у тебе ще не написана. 
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Мені потрібна підказка із написанням цієї додаткової функції.
+    </div>
+    <div class="answer">
+        Кожне слово має бути "очищене" від нелітерних символів між буквами слова
+        і від повторюваних літер. Оскільки твої "червоні" слова у нижньому регістрі,
+        то слова у рядку теж мають бути такими для зручності перевірки. Тож, 
+        всередині функції тобі слід створити нову змінну з початковим значенням у вигляді
+        порожнього рядка, яку ти потім повертатимеш, і ітерувати по кожному символу
+        у вхідному слові у нижньому регістрі:
+    <br />
+    <br />
+        <pre class="brush: python">
+def convert(word):
+
+    s = ""
+    for char in word.lower():
+        ...
+
+    return s     
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Як позбутися повторюваних символів і нелітерних символів?
+    </div>
+    <div class="answer">
+        Тобі слід додавати символ в новий рядок, якщо він є літерою (використай 
+        рядковий метод <a target="_blank" href="https://www.w3schools.com/python/ref_string_isalpha.asp">str.isalpha()</a>)
+        і якщо новий рядок порожній або останній символ у новому рядку не однаковий
+        із поточним символом:
+    <br />
+    <br />
+        <pre class="brush: python">
+def convert(word):
+
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1] != char):
+            s += char
+
+    return s
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        То як мій фінальний розв'язок повинен виглядати?
+    </div>
+    <div class="answer">
+        Тобі слід обгорнути код першої функції у вираз функції і додати return з
+        функцією any() з усіма умовами. Якщо будь-яка із них є правдивою (True)
+        - то тема листа є стресовою. Ось повний розв'язок:
+        <br />
+        <br />
+        <pre class="brush: python">
+def is_stressful(subj):
+
+    cond1 = subj.isupper()
+    cond2 = subj.endswith("!!!")
+    cond3 = any(word in ("help", "asap", "urgent")
+                for word in map(convert, subj.split()))
+    
+    return any([cond1, cond2, cond3])
+
+def convert(word):
+    
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1] != char):
+            s += char
+    
+    return s 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Покажи мені більше розв'язків!<br />
+        Адже я хочу стати справжнім Python Ніндзею!
+    </div>
+    <div class="answer">
+        Звісно, тримай!<br />
+        Використання модуля регулярних виразів з патернами для "червоних" слів,
+        перевірка різних варіантів не-літерних символів між літерами у слові. 
+        <br />
+        <br />
+        <pre class="brush: python">
+import re
+
+def is_stressful(subj):
+
+    patterns = ('[H{0}E{0}L{0}P]+',
+                '[A{0}S{0}A{0}P]+',
+                '[U{0}R{0}G{0}E{0}N{0}T]+',
+                '!!!$')
+    ups = subj.upper()
+    return subj == ups or any(re.search(p.format(']+(?! )[\W]*['), ups)
+                              for p in patterns)
+        </pre>
+        Тисни "Best solutions" в меню місії і побачиш багато інших цікавих розв'язків!
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Дякую! Тепер я знаю і розумію більше! Все працює як слід!
+    </div>
+    <div class="answer">
+        Приємно це чути!
+    </div>
+</div>
+</body>

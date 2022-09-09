@@ -1,0 +1,178 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        I have no idea how to start solving this mission.
+    </div>
+    <div class="answer">
+        The general idea is to check the input string with three conditions.
+        For the third of them you need to convert words with some additional
+        operations.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        How to start this checking?
+    </div>
+    <div class="answer">
+        The first condition - all letters are in upper case. You can make this checking
+        with string method <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a>.
+        It returns True when all letters in string are uppercase:
+        <br />
+        <br />
+        <pre class="brush: python">
+cond1 = subj.isupper()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Looks simple, but I don't feel confident. Need a hint with next step.
+    </div>
+    <div class="answer">
+        The second condition - the input string ends with three exclamation sings.
+        And Python is so cool, that again it has the string method with such name: 
+        <a target="_blank" href="https://www.w3schools.com/python/ref_string_endswith.asp">str.endswith()</a>.
+        Use it for checking the second condition: 
+        <br />
+        <br />
+        <pre class="brush: python">
+cond2 = subj.endswith("!!!")        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, but the third condition is more difficult. How to check it?
+    </div>
+    <div class="answer">
+        Let's think, what you should do and then "translate" it into code.
+        The string is stressful if any word in it is in sequence ("help", "asap", "urgent").
+        But this word should be converted before checking. To implement this idea into code
+        you need function <a target="_blank" href="https://www.w3schools.com/python/ref_func_any.asp">any()</a>,
+        <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a>,
+        function <a target="_blank" href="https://www.w3schools.com/python/ref_func_map.asp">map()</a> to use 
+        some function to each element in sequence. And of course, the string should
+        be splitted into separate words with <a target="_blank" href="https://www.w3schools.com/python/ref_string_split.asp">str.split()</a> string method.
+        <br />
+        <br />
+        <pre class="brush: python">
+cond3 = any(word in ("help", "asap", "urgent")
+            for word in map(convert, subj.split()))        
+        </pre>
+        The function "convert" is not written yet. 
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I need a hint with writing this additional function.
+    </div>
+    <div class="answer">
+        Each word should be "cleaned" from non-letter characters between word
+        letters and from repetition letters. Since your "red" words are in lowercase, 
+        the words in string should be as well. So inside function you should create
+        new empty string variable, which you will return, and iterate over the each
+        characters in lowercase input word:
+    <br />
+    <br />
+        <pre class="brush: python">
+def convert(word):
+
+    s = ""
+    for char in word.lower():
+        ...
+
+    return s     
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        How to rid of repetition and non-letter characters?
+    </div>
+    <div class="answer">
+        You should add characters to new string if they are letters (use string 
+        method <a target="_blank" href="https://www.w3schools.com/python/ref_string_isalpha.asp">str.isalpha()</a>)
+        and if the new string is empty or the last character in new string is not equal
+        to current character:
+    <br />
+    <br />
+        <pre class="brush: python">
+def convert(word):
+
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1] != char):
+            s += char
+
+    return s
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        So, how my final solution should look like?
+    </div>
+    <div class="answer">
+        You should wrap the code from first function into function expression and
+        add return statement with any() function with all conditions. If any of them
+        is True - the letter subject is stressed. Here is the solution:
+        <br />
+        <br />
+        <pre class="brush: python">
+def is_stressful(subj):
+
+    cond1 = subj.isupper()
+    cond2 = subj.endswith("!!!")
+    cond3 = any(word in ("help", "asap", "urgent")
+                for word in map(convert, subj.split()))
+    
+    return any([cond1, cond2, cond3])
+
+def convert(word):
+    
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1] != char):
+            s += char
+    
+    return s 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Show me more solutions!<br />
+        'Cause I wanna be a real Python Ninnjaa!
+    </div>
+    <div class="answer">
+        Sure, grab it!<br />
+        Using regular expression module with patterns for "red" words, trying
+        different variants of non-letter symbols between word characters. 
+        <br />
+        <br />
+        <pre class="brush: python">
+import re
+
+def is_stressful(subj):
+
+    patterns = ('[H{0}E{0}L{0}P]+',
+                '[A{0}S{0}A{0}P]+',
+                '[U{0}R{0}G{0}E{0}N{0}T]+',
+                '!!!$')
+    ups = subj.upper()
+    return subj == ups or any(re.search(p.format(']+(?! )[\W]*['), ups)
+                              for p in patterns)
+        </pre>
+        Click "Best solutions" at mission menu and see a lot of other
+        interesting solutions!
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Thanks! I know and understand more now! Everything works fine!
+    </div>
+    <div class="answer">
+        Glad to hear it!
+    </div>
+</div>
+</body>

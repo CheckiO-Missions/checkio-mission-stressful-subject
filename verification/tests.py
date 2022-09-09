@@ -11,93 +11,93 @@ Each test is dict with
 TESTS = {
     "Basics": [
         {
-            "input": "Hi",
+            "input": ["Hi"],
             "answer": False
         },
         {
-            "input": "I neeed HELP",
+            "input": ["I neeed HELP"],
             "answer": True
+        },
+        {
+            "input": ["I neeed HLEP"],
+            "answer": False
         }
     ],
     "Extra": [
         {
-            "input": "Hi",
+            "input": ["Hi"],
             "answer": False
         },
         {
-            "input": "I neeed HELP",
+            "input": ["HELP"],
             "answer": True
         },
         {
-            "input": "HELP",
-            "answer": True
-        },
-        {
-            "input": "something is gona happen",
+            "input": ["something is gona happen"],
             "answer": False
         },
         {
-            "input": "Hi!",
+            "input": ["Hi!"],
             "answer": False
         },
         {
-            "input": "asap help",
+            "input": ["asap help"],
             "answer": True
         },
         {
-            "input": "h!e!l!p",
+            "input": ["h!e!l!p"],
             "answer": True
         },
         {
-            "input": "We need you A.S.A.P.!!",
+            "input": ["We need you A.S.A.P.!!"],
             "answer": True
         },
         {
-            "input": "where are you?!!!!",
+            "input": ["where are you?!!!!"],
             "answer": True
         },
         {
-            "input": "UUUURGGGEEEEENT here",
+            "input": ["UUUURGGGEEEEENT here"],
             "answer": True
         },
         {
-            "input": "Happy birthday",
+            "input": ["Happy birthday"],
             "answer": False
         },
         {
-            "input": "I neeed your love",
+            "input": ["I neeed your love"],
             "answer": False
         },
         {
-            "input": "U-R-G-E-N-T issue",
+            "input": ["U-R-G-E-N-T issue"],
             "answer": True
         },
         {
-            "input": "I’m REALLY happy on my vacation!",
+            "input": ["I’m REALLY happy on my vacation!"],
             "answer": False
         },
         {
-            "input": "This is very urgent!",
+            "input": ["This is very urgent!"],
             "answer": True
         },
         {
-            "input": "Heeeeeey!!! I’m having so much fun!”",
+            "input": ["Heeeeeey!!! I’m having so much fun!”"],
             "answer": False
         },
         {
-            "input": "HI HOW ARE YOU?",
+            "input": ["HI HOW ARE YOU?"],
             "answer": True
         },
         {
-            "input": "He loves peace",
+            "input": ["He loves peace"],
             "answer": False
         },
         {
-            "input": "Hello puppy",
+            "input": ["Hello puppy"],
             "answer": False
         },
         {
-            "input": "Headlamp, wastepaper bin and supermagnificently",
+            "input": ["Headlamp, wastepaper bin and supermagnificently"],
             "answer": False
         }
     ]
