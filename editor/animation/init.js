@@ -1,6 +1,6 @@
 //Dont change it
 //Dont change it
-requirejs(['ext_editor_io', 'jquery_190'],
+requirejs(['ext_editor_io2', 'jquery_190'],
     function (extIO, $) {
         function stressfulSubjectCanvas(dom, subj) {
             const RW = 'help asap urgent';
@@ -87,7 +87,7 @@ requirejs(['ext_editor_io', 'jquery_190'],
 
         var io = new extIO({
             animation: function($expl, data){
-                var checkioInput = data.in;
+                var checkioInput = data.in[0];
                 if (!checkioInput)
                     return;
                 stressfulSubjectCanvas($expl, checkioInput);
