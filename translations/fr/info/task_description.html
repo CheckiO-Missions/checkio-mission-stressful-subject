@@ -1,0 +1,40 @@
+<div class="for_info_only" style="text-align: center">
+    <img src="{{MEDIA}}title.png" style="max-height: 296px">
+</div>
+
+<p class="for_info_only">
+    <i>Sofia a eu un mois très stressant et a décidé de prendre une semaine de vacances.
+       Pour éviter tout stress pendant ses vacances, elle veut transférer les courriels dont l'objet est stressant à Stephen
+       avec un objet stressant à Stephen.</i>
+</p>
+
+<p>
+    La fonction doit reconnaître si un objet est stressant.
+    Un objet stressant signifie que toutes les lettres sont en majuscules et/ou que toute la ligne se termine par au moins trois points d'exclamation
+    par au moins 3 points d'exclamation, et/ou qu'il contient au moins l'un des mots suivants
+    mots "rouges": "aide", "asap", "urgent". Chacun de ces mots "rouges" peut être orthographié de différentes manières - "HELP", "asap", "urgent"
+    de différentes manières - "HELP", "help", "HeLp", "H!E!L!P!", "H-E-L-P", voire d'une manière très
+    de façon très longue "HHHEEEEEEEEELLP", mais ils ne peuvent pas être intercalés entre d'autres lettres.
+</p>
+
+<p>
+   <strong>Entrée:</strong> L'objet du message sous la forme d'une chaîne de caractères.
+</p>
+
+<p>
+   <strong>Sortie:</strong> Booléen. 
+</p>
+
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Exemples:</strong>
+    </p>
+    <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+<p>
+    <strong>Condition préalable:</strong>
+    <li><i>Le sujet peut comporter jusqu'à 100 lettres</i></li>
+</p>

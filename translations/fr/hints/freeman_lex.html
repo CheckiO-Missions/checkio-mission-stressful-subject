@@ -1,0 +1,178 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Je n'ai aucune idée de la manière de commencer à résoudre cette mission.
+    </div>
+    <div class="answer">
+        L'idée générale est de vérifier la chaîne d'entrée avec trois conditions.
+        Pour la troisième d'entre elles, vous devez convertir les mots à l'aide d'opérations supplémentaires
+        supplémentaires.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Comment commencer cette vérification?
+    </div>
+    <div class="answer">
+        Première condition: toutes les lettres doivent être en majuscules. Vous pouvez effectuer cette vérification
+        avec la méthode string <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a>.
+        Elle renvoie la valeur True lorsque toutes les lettres de la chaîne sont en majuscules:
+       <br />
+        <br />
+       <pre class="brush: python">
+cond1 = subj.isupper()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Cela semble simple, mais je ne suis pas sûr de moi. J'ai besoin d'un conseil pour l'étape suivante.
+    </div>
+    <div class="answer">
+        La deuxième condition - la chaîne d'entrée se termine par trois points d'exclamation.
+        Et Python est tellement cool, qu'il a encore une fois la méthode string avec un tel nom: 
+       <a target="_blank" href="https://www.w3schools.com/python/ref_string_endswith.asp">str.endswith()</a>.
+        Utilisez-la pour vérifier la deuxième condition: 
+       <br />
+        <br />
+       <pre class="brush: python">
+cond2 = subj.endswith("!!!")        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        D'accord, mais la troisième condition est plus difficile. Comment la vérifier?
+    </div>
+    <div class="answer">
+        Réfléchissons à ce que vous devez faire et traduisons-le en code.
+        La chaîne est stressante si l'un des mots qu'elle contient est dans la séquence ("help", "asap", "urgent").
+        Mais ce mot doit être converti avant d'être vérifié. Pour mettre en œuvre cette idée dans le code
+        vous avez besoin de la fonction <a target="_blank" href="https://www.w3schools.com/python/ref_func_any.asp">any()</a>,
+       <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a>,
+        la fonction <a target="_blank" href="https://www.w3schools.com/python/ref_func_map.asp">map()</a> pour utiliser 
+        une fonction pour chaque élément de la séquence. Et bien sûr, la chaîne doit être
+        être découpée en mots distincts à l'aide de la méthode <a target="_blank" href="https://www.w3schools.com/python/ref_string_split.asp">str.split()</a> string.
+       <br />
+        <br />
+       <pre class="brush: python">
+cond3 = any(word in ("help", "asap", "urgent")
+            for word in map(convert, subj.split()))        
+        </pre>
+        La fonction "convert" n'est pas encore écrite. 
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        J'ai besoin d'une aide pour écrire cette fonction supplémentaire.
+    </div>
+    <div class="answer">
+        Chaque mot doit être "nettoyé" des caractères non alphabétiques entre les lettres du mot et des lettres de répétition
+        entre les lettres du mot et des lettres de répétition. Puisque vos mots "rouges" sont en minuscules, les mots de la chaîne devraient l'être aussi, 
+        les mots de la chaîne doivent l'être également. À l'intérieur de la fonction, vous devez donc créer
+        une nouvelle variable chaîne vide, que vous renverrez, et itérer sur chaque
+        dans les mots en minuscules:
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        ...
+
+    return s     
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Comment se débarrasser des répétitions et des caractères non alphabétiques?
+    </div>
+    <div class="answer">
+        Vous devez ajouter les caractères à la nouvelle chaîne s'il s'agit de lettres (utilisez la méthode string 
+        <a target="_blank" href="https://www.w3schools.com/python/ref_string_isalpha.asp">str.isalpha()</a> )
+        et si la nouvelle chaîne est vide ou si le dernier caractère de la nouvelle chaîne n'est pas égal à
+        au caractère actuel:
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+
+    return s
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Alors, à quoi devrait ressembler ma solution finale?
+    </div>
+    <div class="answer">
+        Vous devez envelopper le code de la première fonction dans une expression de fonction et
+        ajouter l'instruction return avec la fonction any() avec toutes les conditions. Si l'une d'entre elles
+        est Vrai - la lettre sujet est soulignée. Voici la solution:
+       <br />
+        <br />
+       <pre class="brush: python">
+def is_stressful(subj: str) -> bool:
+
+    cond1 = subj.isupper()
+    cond2 = subj.endswith("!!!")
+    cond3 = any(word in ("help", "asap", "urgent")
+                for word in map(convert, subj.split()))
+    
+    return any([cond1, cond2, cond3])
+
+def convert(word: str) -> str:
+    
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+    
+    return s 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Montrez-moi d'autres solutions!<br />
+        parce que je veux être un vrai Python Ninnjaa!
+    </div>
+    <div class="answer">
+        Bien sûr, prenez-le!<br />
+        Utilisation du module d'expressions régulières avec des motifs pour les mots "rouges", en essayant différentes variantes de symboles non alphabétiques entre les caractères des mots
+        différentes variantes de symboles non alphabétiques entre les caractères des mots. 
+       <br />
+        <br />
+       <pre class="brush: python">
+import re
+
+def is_stressful(subj):
+
+    patterns = ('[H{0}E{0}L{0}P]+',
+                '[A{0}S{0}A{0}P]+',
+                '[U{0}R{0}G{0}E{0}N{0}T]+',
+                '!!!$')
+    ups = subj.upper()
+    return subj == ups or any(re.search(p.format(']+(?! )[\W]*['), ups)
+                              for p in patterns)
+        </pre>
+        Cliquez sur "Meilleures solutions" dans le menu de la mission et découvrez de nombreuses autres solutions intéressantes!
+        solutions intéressantes!
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Merci beaucoup! Je sais et je comprends mieux maintenant! Tout fonctionne bien!
+    </div>
+    <div class="answer">
+        Heureux de l'apprendre!
+    </div>
+</div>
+</body>
