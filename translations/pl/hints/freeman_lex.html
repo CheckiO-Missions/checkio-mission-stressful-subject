@@ -1,0 +1,178 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Nie mam pojęcia, jak zacząć rozwiązywać tę misję.
+    </div>
+    <div class="answer">
+        Ogólna idea polega na sprawdzeniu ciągu wejściowego z trzema warunkami.
+        Dla trzeciego z nich trzeba przekonwertować słowa za pomocą dodatkowych operacji
+        operacji.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jak rozpocząć to sprawdzanie?
+    </div>
+    <div class="answer">
+        Pierwszy warunek - wszystkie litery są wielkie. Mogą Państwo dokonać tego sprawdzenia
+        za pomocą metody string <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a>.
+        Zwraca ona True, gdy wszystkie litery w łańcuchu są wielkie:
+       <br />
+        <br />
+       <pre class="brush: python">
+cond1 = subj.isupper()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wygląda prosto, ale nie czuję się pewnie. Proszę o podpowiedź w następnym kroku.
+    </div>
+    <div class="answer">
+        Drugi warunek - ciąg wejściowy kończy się trzema wykrzyknikami.
+        A Python jest taki fajny, że znowu ma metodę string o takiej nazwie: 
+       <a target="_blank" href="https://www.w3schools.com/python/ref_string_endswith.asp">str.endswith()</a>.
+        Proszę jej użyć do sprawdzenia drugiego warunku: 
+       <br />
+        <br />
+       <pre class="brush: python">
+cond2 = subj.endswith("!!!")        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, ale trzeci warunek jest trudniejszy. Jak to sprawdzić?
+    </div>
+    <div class="answer">
+        Proszę się zastanowić, co należy zrobić, a następnie "przełożyć" to na kod.
+        Ciąg jest stresujący, jeśli jakiekolwiek słowo w nim występuje w sekwencji ("help", "asap", "urgent").
+        Ale to słowo powinno zostać przekonwertowane przed sprawdzeniem. Aby zaimplementować ten pomysł w kodzie
+        potrzebna jest funkcja <a target="_blank" href="https://www.w3schools.com/python/ref_func_any.asp">any()</a>,
+       <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a>,
+        funkcja <a target="_blank" href="https://www.w3schools.com/python/ref_func_map.asp">map()</a> do użycia 
+        jakiejś funkcji do każdego elementu w sekwencji. I oczywiście ciąg powinien
+        zostać podzielony na osobne słowa za pomocą metody <a target="_blank" href="https://www.w3schools.com/python/ref_string_split.asp">str.split()</a> string.
+       <br />
+        <br />
+       <pre class="brush: python">
+cond3 = any(word in ("help", "asap", "urgent")
+            for word in map(convert, subj.split()))        
+        </pre>
+        Funkcja "convert" nie jest jeszcze napisana. 
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Proszę o pomoc w napisaniu tej dodatkowej funkcji.
+    </div>
+    <div class="answer">
+        Każde słowo powinno zostać "wyczyszczone" z nieliterowych znaków między literami słowa
+        oraz z powtarzających się liter. Ponieważ Pana "czerwone" słowa są pisane małymi literami, 
+        słowa w łańcuchu powinny być również. Wewnątrz funkcji należy więc utworzyć
+        nową pustą zmienną typu string, którą proszę zwrócić, a następnie wykonać iterację nad każdym
+        znaków w słowie wejściowym pisanym małymi literami:
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        ...
+
+    return s     
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jak pozbyć się powtórzeń i znaków nieliterowych?
+    </div>
+    <div class="answer">
+        Należy dodać znaki do nowego ciągu, jeśli są literami (proszę użyć metody string 
+        metoda <a target="_blank" href="https://www.w3schools.com/python/ref_string_isalpha.asp">str.isalpha()</a>)
+        i jeśli nowy ciąg jest pusty lub ostatni znak w nowym ciągu nie jest równy
+        bieżącemu znakowi:
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+
+    return s
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jak więc powinno wyglądać moje ostateczne rozwiązanie?
+    </div>
+    <div class="answer">
+        Proszę zawinąć kod z pierwszej funkcji w wyrażenie funkcyjne i
+        dodać instrukcję return z funkcją any() ze wszystkimi warunkami. Jeśli którykolwiek z nich
+        jest True - litera subject jest podkreślona. Oto rozwiązanie:
+       <br />
+        <br />
+       <pre class="brush: python">
+def is_stressful(subj: str) -> bool:
+
+    cond1 = subj.isupper()
+    cond2 = subj.endswith("!!!")
+    cond3 = any(word in ("help", "asap", "urgent")
+                for word in map(convert, subj.split()))
+    
+    return any([cond1, cond2, cond3])
+
+def convert(word: str) -> str:
+    
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+    
+    return s 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Proszę mi pokazać więcej rozwiązań!<br />
+        bo chcę być prawdziwym Pythonem Ninnjaa!
+    </div>
+    <div class="answer">
+        Jasne, proszę łapać!<br />
+        Używanie modułu wyrażeń regularnych z wzorcami dla "czerwonych" słów, próbowanie
+        różne warianty symboli nieliterowych między znakami słów. 
+       <br />
+        <br />
+       <pre class="brush: python">
+import re
+
+def is_stressful(subj):
+
+    patterns = ('[H{0}E{0}L{0}P]+',
+                '[A{0}S{0}A{0}P]+',
+                '[U{0}R{0}G{0}E{0}N{0}T]+',
+                '!!!$')
+    ups = subj.upper()
+    return subj == ups or any(re.search(p.format(']+(?! )[\W]*['), ups)
+                              for p in patterns)
+        </pre>
+        Proszę kliknąć "Najlepsze rozwiązania" w menu misji i zobaczyć wiele innych
+        ciekawych rozwiązań!
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!
+    </div>
+    <div class="answer">
+        Miło mi to słyszeć!
+    </div>
+</div>
+</body>
