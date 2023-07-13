@@ -1,0 +1,178 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        我不知道如何开始解决这项任务。
+    </div>
+    <div class="answer">
+        总体思路是在三个条件下检查输入字符串。
+        对于第三个条件，您需要通过一些额外的操作来转换单词。
+        操作。
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        如何开始检查？
+    </div>
+    <div class="answer">
+        第一个条件 - 所有字母均为大写。您可以使用
+        使用字符串方法<a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a> 。
+        当字符串中所有字母都是大写字母时，返回True：
+       <br />
+        <br />
+       <pre class="brush: python">
+cond1 = subj.isupper()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        看起来很简单，但我没有信心。下一步需要提示。
+    </div>
+    <div class="answer">
+        第二个条件 - 输入字符串以三个感叹号结束。
+        Python太酷了，它的字符串方法也有这样的名字...： 
+       <a target="_blank" href="https://www.w3schools.com/python/ref_string_endswith.asp">str.endswith()</a>.
+        使用它来检查第二个条件： 
+       <br />
+        <br />
+       <pre class="brush: python">
+cond2 = subj.endswith("!!!")        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        好的，但是第三个条件比较困难。如何检查？
+    </div>
+    <div class="answer">
+        让我们想一想，您应该怎么做，然后 "翻译 "成代码。
+        如果字符串中的任何单词是连续的（"help"、"asap"、"urgent"），那么这个字符串是有压力的。
+        但是在检查之前应该转换这个词。要在代码中实现这个想法
+        您需要函数<a target="_blank" href="https://www.w3schools.com/python/ref_func_any.asp">any()</a> 、
+       <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a>,
+        函数<a target="_blank" href="https://www.w3schools.com/python/ref_func_map.asp">map()</a> 
+        对每个元素的序列使用一些函数。当然，字符串应该
+        使用<a target="_blank" href="https://www.w3schools.com/python/ref_string_split.asp">str.split()</a> string 方法将字符串分割成单独的单词。
+       <br />
+        <br />
+       <pre class="brush: python">
+cond3 = any(word in ("help", "asap", "urgent")
+            for word in map(convert, subj.split()))        
+        </pre>
+        函数 "convert "尚未编写。 
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        我需要一个提示来编写这个附加函数。
+    </div>
+    <div class="answer">
+        每个单词应 "清除 "单词字母之间的非字母字符和重复字母。
+        字母和重复字母。由于您的 "红色 "单词是小写字母、 
+        字符串中的单词也应小写。因此，在函数内部，您应该创建
+        新的空字符串变量，然后遍历输入的小写单词中的每个
+        小写输入单词中的字符：
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        ...
+
+    return s     
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        如何去除重复和非字母字符？
+    </div>
+    <div class="answer">
+        如果字符是字母，您应该将其添加到新字符串中（使用字符串 
+        方法<a target="_blank" href="https://www.w3schools.com/python/ref_string_isalpha.asp">str.isalpha()</a>)
+        如果新字符串为空或者新字符串中的最后一个字符不等于当前字符
+        则应将字符添加到新字符串中：
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+
+    return s
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        那么，我的最终解决方案应该是怎样的呢？
+    </div>
+    <div class="answer">
+        您应该将第一个函数中的代码封装到函数表达式中，并将any()函数的返回语句添加到所有条件中。
+        在any()函数中添加return语句。如果其中任何一个
+        为 "true"，则主语字母被强调。下面是解决方案：
+       <br />
+        <br />
+       <pre class="brush: python">
+def is_stressful(subj: str) -> bool:
+
+    cond1 = subj.isupper()
+    cond2 = subj.endswith("!!!")
+    cond3 = any(word in ("help", "asap", "urgent")
+                for word in map(convert, subj.split()))
+    
+    return any([cond1, cond2, cond3])
+
+def convert(word: str) -> str:
+    
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+    
+    return s 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        告诉我更多的解决方案！<br />
+        因为我想成为一个真正的Python Ninnjaa！
+    </div>
+    <div class="answer">
+        当然，抓住它！<br />
+        使用正则表达式模块的 "红 "字模式，尝试
+        单词字符之间的非字母符号的不同变体。 
+       <br />
+        <br />
+       <pre class="brush: python">
+import re
+
+def is_stressful(subj):
+
+    patterns = ('[H{0}E{0}L{0}P]+',
+                '[A{0}S{0}A{0}P]+',
+                '[U{0}R{0}G{0}E{0}N{0}T]+',
+                '!!!$')
+    ups = subj.upper()
+    return subj == ups or any(re.search(p.format(']+(?! )[\W]*['), ups)
+                              for p in patterns)
+        </pre>
+        点击任务菜单中的 "最佳解决方案"，查看更多其他有趣的解决方案
+        有趣的解决方案！
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        谢谢！我现在知道并理解得更多了！一切正常！
+    </div>
+    <div class="answer">
+        很高兴听到这个消息！
+    </div>
+</div>
+</body>
