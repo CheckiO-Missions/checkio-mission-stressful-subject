@@ -1,0 +1,40 @@
+<div class="for_info_only" style="text-align: center">
+    <img src="{{MEDIA}}title.png" style="max-height: 296px">
+</div>
+
+<p class="for_info_only">
+    <i>Sofia miała bardzo stresujący miesiąc i postanowiła wziąć tygodniowy urlop.
+       Aby uniknąć stresu podczas wakacji, chce przekazywać Stephenowi e-maile z
+       o stresującym temacie do Stephena.</i>
+</p>
+
+<p>
+    Funkcja powinna rozpoznać, czy temat wiadomości jest stresujący.
+    Stresujący temat oznacza, że wszystkie litery są wielkie i/lub cała linia kończy się co najmniej trzema wykrzyknikami
+    co najmniej 3 wykrzyknikami i/lub zawiera co najmniej jedno z następujących słów
+    "czerwone" słowa: "pomoc", "jak najszybciej", "pilne". Każde z tych "czerwonych" słów może być zapisane na różne sposoby
+    na różne sposoby - "HELP", "help", "HeLp", "H!E!L!P!", "H-E-L-P", a nawet w bardzo długi sposób "HH!"
+    bardzo długi sposób "HHHEEEEEEELLP", po prostu nie mogą mieć między sobą żadnych innych liter.
+</p>
+
+<p>
+   <strong>Dane wejściowe:</strong> Linia tematu jako ciąg znaków.
+</p>
+
+<p>
+   <strong>Wyjście:</strong> Wartość logiczna. 
+</p>
+
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Przykłady:</strong>
+    </p>
+    <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+<p>
+    <strong>Warunek wstępny:</strong>
+    <li><i>Subject może składać się z maksymalnie 100 liter</i></li>
+</p>
