@@ -1,0 +1,178 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Ich habe keine Ahnung, wie ich mit der Lösung dieser Aufgabe beginnen soll.
+    </div>
+    <div class="answer">
+        Die allgemeine Idee ist, die Eingabezeichenfolge mit drei Bedingungen zu prüfen.
+        Für die dritte Bedingung müssen Sie die Wörter mit einigen zusätzlichen
+        operationen.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wie beginnen Sie diese Prüfung?
+    </div>
+    <div class="answer">
+        Die erste Bedingung - alle Buchstaben sind in Großbuchstaben. Sie können diese Prüfung
+        mit der String-Methode <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a> durchführen.
+        Sie gibt True zurück, wenn alle Buchstaben in der Zeichenkette in Großbuchstaben geschrieben sind:
+       <br />
+        <br />
+       <pre class="brush: python">
+cond1 = subj.isupper()
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Sieht einfach aus, aber ich fühle mich nicht sicher. Ich brauche einen Tipp für den nächsten Schritt.
+    </div>
+    <div class="answer">
+        Die zweite Bedingung - die Eingabezeichenkette endet mit drei Ausrufezeichen.
+        Und Python ist so cool, dass es wieder die String-Methode mit diesem Namen hat: 
+       <a target="_blank" href="https://www.w3schools.com/python/ref_string_endswith.asp">str.endswith()</a>.
+        Verwenden Sie diese für die Überprüfung der zweiten Bedingung: 
+       <br />
+        <br />
+       <pre class="brush: python">
+cond2 = subj.endswith("!!!")        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, aber die dritte Bedingung ist schwieriger. Wie kann man sie überprüfen?
+    </div>
+    <div class="answer">
+        Lassen Sie uns überlegen, was Sie tun sollten, und es dann in Code "übersetzen".
+        Die Zeichenkette ist stressig, wenn ein beliebiges Wort darin in einer Sequenz steht ("Hilfe", "asap", "dringend").
+        Aber dieses Wort sollte vor der Überprüfung umgewandelt werden. Um diese Idee in Code umzusetzen
+        benötigen Sie die Funktion <a target="_blank" href="https://www.w3schools.com/python/ref_func_any.asp">any()</a>,
+       <a target="_blank" href="https://www.w3schools.com/python/python_lists_comprehension.asp">list comprehension</a>,
+        funktion <a target="_blank" href="https://www.w3schools.com/python/ref_func_map.asp">map()</a> zur Verwendung von 
+        eine Funktion für jedes Element der Reihe nach. Und natürlich sollte die Zeichenkette
+        mit der Methode <a target="_blank" href="https://www.w3schools.com/python/ref_string_split.asp">str.split()</a> string in einzelne Wörter zerlegt werden.
+       <br />
+        <br />
+       <pre class="brush: python">
+cond3 = any(word in ("help", "asap", "urgent")
+            for word in map(convert, subj.split()))        
+        </pre>
+        Die Funktion "convert" ist noch nicht geschrieben. 
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ich benötige einen Hinweis zum Schreiben dieser zusätzlichen Funktion.
+    </div>
+    <div class="answer">
+        Jedes Wort sollte von Nicht-Buchstaben-Zeichen zwischen den Wort
+        buchstaben und von Wiederholungsbuchstaben bereinigt werden. Da Ihre "roten" Wörter in Kleinbuchstaben geschrieben sind, 
+        sollten die Wörter in der Zeichenkette ebenfalls klein geschrieben werden. Innerhalb der Funktion sollten Sie also eine
+        eine neue leere String-Variable erstellen, die Sie zurückgeben, und über die einzelnen
+        zeichen im klein geschriebenen Eingabewort:
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        ...
+
+    return s     
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wie wird man Wiederholungen und Nicht-Buchstaben-Zeichen los?
+    </div>
+    <div class="answer">
+        Sie sollten Zeichen in eine neue Zeichenkette einfügen, wenn es sich um Buchstaben handelt (verwenden Sie die String 
+        methode <a target="_blank" href="https://www.w3schools.com/python/ref_string_isalpha.asp">str.isalpha()</a>)
+        und wenn die neue Zeichenkette leer ist oder das letzte Zeichen in der neuen Zeichenkette nicht gleich ist
+        gleich dem aktuellen Zeichen ist:
+   <br />
+    <br />
+       <pre class="brush: python">
+def convert(word: str) -> str:
+
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+
+    return s
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wie sollte also meine endgültige Lösung aussehen?
+    </div>
+    <div class="answer">
+        Sie sollten den Code der ersten Funktion in einen Funktionsausdruck verpacken und
+        die Anweisung return mit der Funktion any() mit allen Bedingungen hinzufügen. Wenn eine von ihnen
+        wahr ist - wird der Buchstabe subject betont. Hier ist die Lösung:
+       <br />
+        <br />
+       <pre class="brush: python">
+def is_stressful(subj: str) -> bool:
+
+    cond1 = subj.isupper()
+    cond2 = subj.endswith("!!!")
+    cond3 = any(word in ("help", "asap", "urgent")
+                for word in map(convert, subj.split()))
+    
+    return any([cond1, cond2, cond3])
+
+def convert(word: str) -> str:
+    
+    s = ""
+    for char in word.lower():
+        if char.isalpha() and (not s or s[-1]!= char):
+            s += char
+    
+    return s 
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Zeigen Sie mir mehr Lösungen!<br />
+        denn ich möchte ein echter Python Ninnjaa sein!
+    </div>
+    <div class="answer">
+        Klar, greifen Sie zu!<br />
+        Verwendung des Moduls für reguläre Ausdrücke mit Mustern für "rote" Wörter, Ausprobieren
+        verschiedene Varianten von Nicht-Buchstaben-Symbolen zwischen Wortzeichen. 
+       <br />
+        <br />
+       <pre class="brush: python">
+import re
+
+def is_stressful(subj):
+
+    patterns = ('[H{0}E{0}L{0}P]+',
+                '[A{0}S{0}A{0}P]+',
+                '[U{0}R{0}G{0}E{0}N{0}T]+',
+                '!!!$')
+    ups = subj.upper()
+    return subj == ups or any(re.search(p.format(']+(?! )[\W]*['), ups)
+                              for p in patterns)
+        </pre>
+        Klicken Sie im Missionsmenü auf "Beste Lösungen" und sehen Sie sich eine Menge anderer
+        interessante Lösungen!
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Danke! Ich weiß und verstehe jetzt mehr! Alles funktioniert bestens!
+    </div>
+    <div class="answer">
+        Freut mich zu hören!
+    </div>
+</div>
+</body>
